@@ -18,7 +18,7 @@ diff = future - today
 
 bot = telebot.TeleBot(TELEGRAM_TOKEN)
 
-@bot.message_handler(commands=["mundial"])
+bot.message_handler(commands=["mundial"])
 def cmd_start(message):
     bot.reply_to(message, "Faltan" + " " + str(diff.days) + " " + "días!")
 
@@ -31,11 +31,11 @@ if __name__ == "__main__":
     hilo_bot.start()
     print('Bot Iniciado')
 
-while seconds != 57605:
+while seconds != 57608:
     now = datetime.now()
     current_time = now.strftime("%H:%M:%S")
     date_time = dt.datetime.strptime(current_time, "%H:%M:%S")
     a_timedelta = date_time - dt.datetime(1900, 1, 1)
     seconds = a_timedelta.total_seconds()
-    if seconds == 57605:
+    if seconds == 57608:
         imprimir_mensaje()
