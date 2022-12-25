@@ -18,10 +18,6 @@ diff = future - today
 
 bot = telebot.TeleBot(TELEGRAM_TOKEN)
 
-bot.message_handler(commands=["mundial"])
-def cmd_start(message):
-    bot.reply_to(message, "Faltan" + " " + str(diff.days) + " " + "días!")
-
 def recibir_mensajes():
     bot.infinity_polling()
 
