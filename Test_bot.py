@@ -26,6 +26,23 @@ def cmd_start(message):
 def cmd_help(message):
     bot.reply_to(message, "Si necesitas ayuda preguntale a google!")
 
+@bot.message_handler(commands=['echo'])
+def echo(message):
+    chat_id = message.chat.id
+    text = message.text[6:]  # Get the text of the message, excluding the '/echo' command
+    bot.send_message(chat_id, text)
+
+@bot.message_handler(commands=['info'])
+def send_welcome(message):
+    chat_id = message.chat.id
+    bot.send_message(chat_id, "Esta es la lista de comandos:\n"
+                        "/mundial - días para el mundial 2026\n"
+                        "/help - podes encontrar toda la info importante\n"
+                        "/info - este comando bobo\n"
+                        "/clima - no sé que te puedo explicar bobo es el clima\n"
+                        "/cumple - nuestros cumples\n"
+                        "/scaloneta - cumple de la scaloneta espacial")
+
 def recibir_mensajes():
     bot.infinity_polling()
 
