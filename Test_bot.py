@@ -4,6 +4,8 @@ from datetime import datetime
 import telebot
 import datetime as dt
 import threading
+import requests
+import json
 
 now = datetime.now()
 current_time = now.strftime("%H:%M:%S")
@@ -34,6 +36,8 @@ def echo(message):
 
 @bot.message_handler(commands=['info'])
 def send_welcome(message):
+    print(message.location)
+    print(message.text[9:])
     chat_id = message.chat.id
     bot.send_message(chat_id, "Esta es la lista de comandos:\n"
                         "/mundial - días para el mundial 2026\n"
@@ -52,11 +56,11 @@ if __name__ == "__main__":
     hilo_bot.start()
     print('Bot Iniciado')
 
-while seconds != 86400:
+while seconds != 0:
     now = datetime.now()
     current_time = now.strftime("%H:%M:%S")
     date_time = dt.datetime.strptime(current_time, "%H:%M:%S")
     a_timedelta = date_time - dt.datetime(1900, 1, 1)
     seconds = a_timedelta.total_seconds()
-    if seconds == 57605:
-        imprimir_mensaje()
+    if seconds == 0:
+        bot.send_message(BOCA_CID, "Faltan" + " " + str(diff.days) + " " + "días!")
