@@ -103,7 +103,7 @@ def cmd_prox(message):
         fecha_cumple=fecha_cumple.split('-')
         if fecha_cumple[1] == today2[1]:
             if fecha_cumple[0] >= today2[0]:
-                next_three.append(nombre+' cumple el '+ fecha_cumple[0] + ' de ' + meses[(fecha_cumple[1]) - 1])
+                next_three.append(nombre+' cumple el '+ fecha_cumple[0] + ' de ' + meses[(int(fecha_cumple[1])) - 1])
         if len(next_three) == 3:
             break
     if len(next_three) < 3:
@@ -111,7 +111,7 @@ def cmd_prox(message):
             fecha_cumple=fecha_cumple.split('-')
             if len(next_three) < 3:
                 if int(fecha_cumple[1]) == int(today2[1])+1:
-                    next_three.append(nombre+' cumple el '+ fecha_cumple[0] + ' de ' + meses[(fecha_cumple[1]) - 1])
+                    next_three.append(nombre+' cumple el '+ fecha_cumple[0] + ' de ' + meses[(int(fecha_cumple[1])) - 1])
             if len(next_three) == 3:
                 break
     next_three[2]=next_three[1]
@@ -128,7 +128,7 @@ def cmd_mes(message):
     for nombre, fecha_cumple in cumple.items():
         fecha_cumple=fecha_cumple.split('-')
         if fecha_cumple[1] == today2[1]:
-            cumplemes.append(nombre + ' de ' + meses[(fecha_cumple[1]) - 1])
+            cumplemes.append(nombre + ' de ' + meses[(int(fecha_cumple[1])) - 1])
     cumplemes_string = "\n".join(cumplemes)
     bot.send_message(chat_id, 'Los que cumplen este mes:\n' + cumplemes_string)
 
@@ -140,7 +140,7 @@ def cmd_mes_auto():
     for nombre, fecha_cumple in cumple.items():
         fecha_cumple=fecha_cumple.split('-')
         if fecha_cumple[1] == today2[1]:
-            cumplemes.append(nombre + ' de ' + meses[(fecha_cumple[1]) - 1])
+            cumplemes.append(nombre + ' de ' + meses[(int(fecha_cumple[1])) - 1])
     cumplemes_string = "\n".join(cumplemes)
     bot.send_message(BOCA_CID, 'Los que cumplen este mes:\n' + cumplemes_string)
 
