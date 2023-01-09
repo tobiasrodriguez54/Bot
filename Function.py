@@ -21,6 +21,8 @@ diff = future - today
 
 bot = telebot.TeleBot(TELEGRAM_TOKEN)
 
+meses = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre']
+
 def monthtxt(month_number):
     if month_number == '01':
         return "enero"
@@ -47,8 +49,7 @@ def monthtxt(month_number):
     elif month_number == '12':
         return "diciembre"
     else:
-        return "Numero de mes invalido"
-
+        return "Numero de mes invalido"    
 
 @bot.message_handler(commands=["mundial"])
 def cmd_start(message):
@@ -102,7 +103,7 @@ def cmd_prox(message):
         fecha_cumple=fecha_cumple.split('-')
         if fecha_cumple[1] == today2[1]:
             if fecha_cumple[0] >= today2[0]:
-                next_three.append(nombre+' cumple el '+ fecha_cumple[0] + ' de ' + monthtxt(fecha_cumple[1]))
+                next_three.append(nombre+' cumple el '+ fecha_cumple[0] + ' de ' + meses[(fecha_cumple[1]) - 1])
         if len(next_three) == 3:
             break
     if len(next_three) < 3:
@@ -110,7 +111,7 @@ def cmd_prox(message):
             fecha_cumple=fecha_cumple.split('-')
             if len(next_three) < 3:
                 if int(fecha_cumple[1]) == int(today2[1])+1:
-                    next_three.append(nombre+' cumple el '+ fecha_cumple[0] + ' de ' + monthtxt(fecha_cumple[1]))
+                    next_three.append(nombre+' cumple el '+ fecha_cumple[0] + ' de ' + meses[(fecha_cumple[1]) - 1])
             if len(next_three) == 3:
                 break
     next_three[2]=next_three[1]
@@ -120,13 +121,14 @@ def cmd_prox(message):
                                 + next_three_str)
 
 @bot.message_handler(commands=['cumplemes'])
+
 def cmd_mes(message):
     cumplemes=[]
     chat_id = message.chat.id
     for nombre, fecha_cumple in cumple.items():
         fecha_cumple=fecha_cumple.split('-')
         if fecha_cumple[1] == today2[1]:
-            cumplemes.append(nombre)
+            cumplemes.append(nombre + ' de ' + meses[(fecha_cumple[1]) - 1])
     cumplemes_string = "\n".join(cumplemes)
     bot.send_message(chat_id, 'Los que cumplen este mes:\n' + cumplemes_string)
 
@@ -138,7 +140,7 @@ def cmd_mes_auto():
     for nombre, fecha_cumple in cumple.items():
         fecha_cumple=fecha_cumple.split('-')
         if fecha_cumple[1] == today2[1]:
-            cumplemes.append(nombre)
+            cumplemes.append(nombre + ' de ' + meses[(fecha_cumple[1]) - 1])
     cumplemes_string = "\n".join(cumplemes)
     bot.send_message(BOCA_CID, 'Los que cumplen este mes:\n' + cumplemes_string)
 
