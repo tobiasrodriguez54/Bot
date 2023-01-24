@@ -128,7 +128,7 @@ def cmd_mes(message):
     for nombre, fecha_cumple in cumple.items():
         fecha_cumple=fecha_cumple.split('-')
         if fecha_cumple[1] == today2[1]:
-            cumplemes.append(nombre + ' de ' + meses[(int(fecha_cumple[1])) - 1])
+            cumplemes.append(nombre+' '+ fecha_cumple[0])
     cumplemes_string = "\n".join(cumplemes)
     bot.send_message(chat_id, 'Los que cumplen este mes:\n' + cumplemes_string)
 
